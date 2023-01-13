@@ -1,0 +1,19 @@
+---
+- name: database
+  hosts: db
+  gather_facts: no
+  become: yes
+
+  tasks:
+    - name: include redis role
+      include_role:
+        name: redis
+      vars:
+        redis_config_name: pytime
+        redis_bind: "{{ local_pytime_redis_bind }}"
+
+    - name: include redis role (pytime)
+      include_role:
+        name: redis
+        tasks_from: pytime.yml
+...
