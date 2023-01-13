@@ -9,6 +9,9 @@
       include_role:
         name: joomla
         tasks_from: php.yml
+      vars:
+        local_php_version: "{{ php_version }}"
+        
     
     - name: include joomla role
       include_role:

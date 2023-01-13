@@ -2,19 +2,27 @@
 - name: install php
   apt:
     name: 
-      - php7.4-cli 
-      - php7.4-gd 
-      - php7.4-opcache 
-      - php7.4-pgsql 
-      - php7.4-json 
-      - php7.4-mcrypt 
-      - php7.4-xml 
-      - php7.4-curl
+      - "php{{ local_php_version }}-cli" 
+      - "php{{ local_php_version }}-gd" 
+      - "php{{ local_php_version }}-opcache" 
+      - "php{{ local_php_version }}-pgsql" 
+      - "php{{ local_php_version }}-json" 
+      - "php{{ local_php_version }}-curl"
+      - "php{{ local_php_version }}-zip"
+      - "php{{ local_php_version }}-fpm"
+      - "php{{ local_php_version }}-common"
+      - "php{{ local_php_version }}-gmp" 
+      - "php{{ local_php_version }}-intl" 
+      - "php{{ local_php_version }}-mbstring" 
+      - "php{{ local_php_version }}-xmlrpc" 
+      - "php{{ local_php_version }}-gd"
+      - "php{{ local_php_version }}-cli" 
+      - "php{{ local_php_version }}-zip"
     update_cache: yes
 
 - name: copy php config
   template:
     src: templates/php.ini.j2
-    dest: /etc/php/7.4/fpm/php.ini
+    dest: "/etc/php/{{ local_php_version }}/fpm/php.ini"
    
 ...

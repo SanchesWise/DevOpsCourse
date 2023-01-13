@@ -1,7 +1,4 @@
 ---
-  vars:
-    pg_config_path: "/etc/postgresql/{{ pg_version }}/main"
-
   - name: Add an Apt signing key
     ansible.builtin.apt_key:
       url: "{{ item }}" 

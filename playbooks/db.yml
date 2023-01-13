@@ -1,16 +1,20 @@
 ---
 - name: database
   hosts: db
-  gather_facts: no
+  gather_facts: yes
   become: yes
 
   tasks:
     - name: include pg role
       include_role:
         name: pg
+      vars:
+        pg_config_path: /etc/postgresql/{{ pg_version }}/main
 
     - name: include pg role (user)
       include_role:
         name: pg
         tasks_from: user.yml
+      vars:
+        pg_config_path: /etc/postgresql/{{ pg_version }}/main
 ...

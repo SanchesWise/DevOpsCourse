@@ -6,5 +6,4 @@ db_password: joomla
 db_name: joomla
 pg_user: postgres
 pg_password: $6$wLBqdYLR8F..sbhZ$OLAy85eJhjymOoME59Rr84po/a/BocHQ4hyHgg/UT/ReFYxR5V68ktwPR0A.1qEliZ8Tktj5yPB06ypGrXr6v.
-pg_version: 14
 ...
