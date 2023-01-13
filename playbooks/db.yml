@@ -5,15 +5,12 @@
   become: yes
 
   tasks:
-    - name: include redis role
+    - name: include pg role
       include_role:
-        name: redis
-      vars:
-        redis_config_name: pytime
-        redis_bind: "{{ local_pytime_redis_bind }}"
+        name: pg
 
-    - name: include redis role (pytime)
+    - name: include pg role (user)
       include_role:
-        name: redis
-        tasks_from: pytime.yml
+        name: pg
+        tasks_from: user.yml
 ...

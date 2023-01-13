@@ -1,4 +1,6 @@
 ---
+  vars:
+    pg_config_path: "/etc/postgresql/{{ pg_version }}/main"
 
   - name: Add an Apt signing key
     ansible.builtin.apt_key:
@@ -19,8 +21,8 @@
   - name: Installing packages 
     ansible.builtin.package:
       name:
-        - postgresql-14
-        - postgresql-client-14
+        - "postgresql-{{ pg_version }}"
+        - "postgresql-client-{{ pg_version }}"
         - python3-venv 
         - python3-pip  
         - acl
@@ -30,61 +32,8 @@
   - name: Install bottle python package
     ansible.builtin.pip:
       name: psycopg2-binary
- 
 
-  - name: Create DB dir for Postgres
-    ansible.builtin.file:
-      path: /opt/postgres/
-      state: directory
-      mode: '0700'
-      owner: "{{ pg_user }}"
-      group: "{{ pg_user }}"
-
-  # - name: Move DB to new dir for Postgres
-  #   ansible.builtin.copy:
-  #     src: /var/lib/postgresql/15/main
-  #     dest: /opt/postgres/
-  #     remote_src: yes
-  #     mode: '0700'
-  #     owner: "{{ pg_user }}"
-  #     group: "{{ pg_user }}"
-  - name: Change conf
-    ansible.builtin.lineinfile:
-      path: /etc/postgresql/{{ pg_version }}/main/postgresql.conf
-      regexp: '^listen_addresses = '
-      line: listen_addresses = '*'
-  - name: Change conf
-    ansible.builtin.lineinfile:
-      path: /etc/postgresql/{{ pg_version }}/main/postgresql.conf
-      regexp: '^shared_buffers ='
-      line: shared_buffers = 512MB
-  - name: Change conf
-    ansible.builtin.lineinfile:
-      path: /etc/postgresql/{{ pg_version }}/main/postgresql.conf
-      regexp: '^maintenance_work_mem ='
-      line: maintenance_work_mem = 256MB
-  - name: Change conf
-    ansible.builtin.lineinfile:
-      path: /etc/postgresql/{{ pg_version }}/main/postgresql.conf
-      regexp: '^vacuum_cost_limit ='
-      line: vacuum_cost_limit = 4000
-  - name: Change conf
-    ansible.builtin.lineinfile:
-      path: /etc/postgresql/{{ pg_version }}/main/postgresql.conf
-      regexp: '^max_wal_size ='
-      line: max_wal_size = 2GB
-  - name: Change conf
-    ansible.builtin.lineinfile:
-      path: /etc/postgresql/{{ pg_version }}/main/postgresql.conf
-      regexp: '^checkpoint_completion_target ='
-      line: checkpoint_completion_target = 0.75
-  - name: Change conf
-    ansible.builtin.lineinfile:
-      path: /etc/postgresql/{{ pg_version }}/main/postgresql.conf
-      regexp: '^effective_cache_size ='
-      line: effective_cache_size = 1GB
-
-  - name: Change postgres hba config file 
+  - name: Change postgres config files
     template:
       src: "{{ item }}"
       dest: "{{ pg_config_path }}"
@@ -93,11 +42,13 @@
       group: "{{ pg_user }}"
     with_items:
       - templates/pg_hba.conf      
-      #- templates/postgresql.conf
+      - templates/postgresql.conf
 
   - name: Start and enable services
     service: 
       name: postgresql
       state: restarted 
       enabled: yes
+
+...
 

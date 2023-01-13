@@ -1,4 +1,7 @@
 ---
+vars:
+  pg_config_path: "/etc/postgresql/{{ pg_version }}/main"
+
 - name: Create db user
   postgresql_user:
     state: present
@@ -29,3 +32,4 @@
     create: true
   notify:
     - restart postgres
+...
