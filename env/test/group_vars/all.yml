@@ -1,5 +1,6 @@
 ---
-local_joomla_directory: /opt/pytime
-local_joomla_socket: 127.0.0.1:9090
+local_joomla_directory: /opt/joomla
+# local_joomla_path: 127.0.0.1:9090
+# local_joomla_port: 127.0.0.1:9090
 local_joomla_pg_bind: 127.0.0.1
 ...

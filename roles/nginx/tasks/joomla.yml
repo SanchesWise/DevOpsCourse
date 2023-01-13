@@ -1,9 +1,10 @@
 ---
 - name: copy nginx config
   template:
-    src: templates/pytime.j2
+    src: templates/joomla.j2
     dest: /etc/nginx/sites-enabled/default
   vars:
-    template_nginx_app_socket: "{{ nginx_app_socket }}"
+    template_nginx_app_path: "{{ nginx_app_path }}"
+    # template_nginx_app_port: "{{ nginx_app_port }}"
   notify: restart nginx
 ...

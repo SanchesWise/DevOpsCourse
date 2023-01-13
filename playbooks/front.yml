@@ -14,5 +14,6 @@
         name: nginx
         tasks_from: joomla.yml
       vars:
-        nginx_app_socket: "{{ local_joomla_socket }}"
+        nginx_app_path: "{{ local_joomla_directory }}"
+        # nginx_app_port: "{{ local_joomla_port }}"
 ...

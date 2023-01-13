@@ -5,10 +5,32 @@
       - php7.1-cli 
       - php7.1-gd 
       - php7.1-opcache 
-      - php7.1-mysql 
+      - php7.1-pgsql 
       - php7.1-json 
       - php7.1-mcrypt 
       - php7.1-xml 
       - php7.1-curl
     update_cache: yes
+
+  - name: Create home dir for joomla
+    ansible.builtin.file:
+      path: "{{ item }}"
+      state: directory
+      mode: '0755'
+      owner: www-data
+      group: www-data
+    with_items:
+      - "{{ local_joomla_directory }}"
+
+  - name: Unarchive a joomla
+    ansible.builtin.unarchive:
+      src: https://downloads.joomla.org/us/cms/joomla3/3-8-12/Joomla_3-8-12-Stable-Full_Package.zip
+      dest: "{{ local_joomla_directory }}"
+      mode: '0755'
+      owner: www-data
+      group: www-data
+      remote_src: yes
+
+  
+   
 ...
