@@ -1,4 +1,6 @@
-## Joomla project
+## Joomla 
+
+Target OS - Ubuntu 
 
 Joomla + PostgreSQL + nginx
 
