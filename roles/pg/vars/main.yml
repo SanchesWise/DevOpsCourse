@@ -1,7 +1,7 @@
 ---
 # vars file for postgres-install
 
-db_user: joomla
+db_user: joomlauser
 db_password: joomla
 db_name: joomla
 pg_user: postgres
