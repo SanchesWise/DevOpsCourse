@@ -9,7 +9,7 @@ vm ansible_host=10.10.2.13
 
 [all:vars]
 ansible_user=ccsfarm
-ansible_ssh_pass=#Cc$F@rm#
-ansible_sudo_pass=#Cc$F@rm#
+ansible_ssh_pass=
+ansible_sudo_pass=
 ansible_ssh_extra_args='-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 ansible_python_interpreter=/usr/bin/python3
