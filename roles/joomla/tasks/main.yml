@@ -1,28 +1,37 @@
 ---
+
+- name: Add repository from PPA 
+  ansible.builtin.apt_repository:
+    repo: ppa:ondrej/php
+
 - name: install php
   apt:
     name: 
-      - "php{{ local_php_version }}-cli" 
-      - "php{{ local_php_version }}-gd" 
-      - "php{{ local_php_version }}-opcache" 
-      - "php{{ local_php_version }}-pgsql" 
-      - "php{{ local_php_version }}-json" 
-      - "php{{ local_php_version }}-curl"
-      - "php{{ local_php_version }}-zip"
-      - "php{{ local_php_version }}-fpm"
-      - "php{{ local_php_version }}-common"
-      - "php{{ local_php_version }}-gmp" 
-      - "php{{ local_php_version }}-intl" 
-      - "php{{ local_php_version }}-mbstring" 
-      - "php{{ local_php_version }}-xmlrpc" 
-      - "php{{ local_php_version }}-gd"
-      - "php{{ local_php_version }}-cli" 
-      - "php{{ local_php_version }}-zip"
+      - "php{{ local_php_version }}" 
+      - php-curl 
+      - php-gd 
+      - php-mbstring 
+      - php-xml 
+      - php-xmlrpc 
+      - php-soap 
+      - php-intl 
+      - php-zip 
+      - php-cli 
+      - php-mysql 
+      - php8.0-common 
+      - php8.0-opcache 
+      - php-gmp 
+      - php-imagick 
+      - openssl 
+      - php-pgsql 
+      - php-smbclient 
+      - php-ssh2 
+      - php-sqlite3
     update_cache: yes
 
 - name: copy php config
   template:
     src: templates/php.ini.j2
-    dest: "/etc/php/{{ local_php_version }}/fpm/php.ini"
+    dest: "/etc/php/{{ local_php_version }}/cli/php.ini"
    
 ...
