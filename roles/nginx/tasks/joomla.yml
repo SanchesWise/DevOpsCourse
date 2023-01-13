@@ -5,6 +5,6 @@
     dest: /etc/nginx/sites-enabled/default
   vars:
     template_nginx_app_path: "{{ nginx_app_path }}"
-    # template_nginx_app_port: "{{ nginx_app_port }}"
+    template_local_php_version: "{{ local_php_version }}"
   notify: restart nginx
 ...

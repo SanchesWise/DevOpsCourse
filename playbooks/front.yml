@@ -15,5 +15,5 @@
         tasks_from: joomla.yml
       vars:
         nginx_app_path: "{{ local_joomla_directory }}"
-        # nginx_app_port: "{{ local_joomla_port }}"
+        local_php_version: "{{ php_version }}"
 ...
